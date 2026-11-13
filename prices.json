@@ -1,0 +1,524 @@
+[
+ {
+  "id": "wf-cat-sterile-turkey-lamb",
+  "w": "400 г",
+  "price": 575,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и ягнёнком"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-lamb",
+  "w": "2 кг",
+  "price": 2387,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и ягнёнком"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-lamb",
+  "w": "5 кг",
+  "price": 4938,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и ягнёнком"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-veal",
+  "w": "400 г",
+  "price": 554,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и телятиной"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-veal",
+  "w": "2 кг",
+  "price": 2280,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и телятиной"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-veal",
+  "w": "5 кг",
+  "price": 4715,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и телятиной"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-chicken",
+  "w": "400 г",
+  "price": 551,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и курицей"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-chicken",
+  "w": "2 кг",
+  "price": 2270,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и курицей"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-chicken",
+  "w": "5 кг",
+  "price": 4690,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и курицей"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-duck",
+  "w": "400 г",
+  "price": 660,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и уткой"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-duck",
+  "w": "2 кг",
+  "price": 2730,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и уткой"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-duck",
+  "w": "5 кг",
+  "price": 5156,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и уткой"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-fish",
+  "w": "400 г",
+  "price": 660,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-fish",
+  "w": "2 кг",
+  "price": 2730,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-cat-sterile-turkey-fish",
+  "w": "5 кг",
+  "price": 5700,
+  "name": "Wonderfur — Для стерилизованных кошек с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-cat-urinary",
+  "w": "400 г",
+  "price": 675,
+  "name": "Wonderfur — Urinary для взрослых кошек при МКБ струвитного типа"
+ },
+ {
+  "id": "wf-cat-urinary",
+  "w": "2 кг",
+  "price": 2760,
+  "name": "Wonderfur — Urinary для взрослых кошек при МКБ струвитного типа"
+ },
+ {
+  "id": "wf-cat-urinary",
+  "w": "5 кг",
+  "price": 5720,
+  "name": "Wonderfur — Urinary для взрослых кошек при МКБ струвитного типа"
+ },
+ {
+  "id": "wf-cat-kitten-turkey-chicken",
+  "w": "400 г",
+  "price": 615,
+  "name": "Wonderfur — Для котят с индейкой и курицей"
+ },
+ {
+  "id": "wf-cat-kitten-turkey-chicken",
+  "w": "2 кг",
+  "price": 2510,
+  "name": "Wonderfur — Для котят с индейкой и курицей"
+ },
+ {
+  "id": "wf-cat-kitten-turkey-chicken",
+  "w": "5 кг",
+  "price": 5200,
+  "name": "Wonderfur — Для котят с индейкой и курицей"
+ },
+ {
+  "id": "wf-dog-lamb-rice",
+  "w": "800 г",
+  "price": 837,
+  "name": "Wonderfur — Для взрослых собак с ягнёнком и рисом"
+ },
+ {
+  "id": "wf-dog-lamb-rice",
+  "w": "3 кг",
+  "price": 2738,
+  "name": "Wonderfur — Для взрослых собак с ягнёнком и рисом"
+ },
+ {
+  "id": "wf-dog-lamb-rice",
+  "w": "10 кг",
+  "price": 7816,
+  "name": "Wonderfur — Для взрослых собак с ягнёнком и рисом"
+ },
+ {
+  "id": "wf-dog-turkey-rice",
+  "w": "800 г",
+  "price": 837,
+  "name": "Wonderfur — Для взрослых собак с индейкой и рисом"
+ },
+ {
+  "id": "wf-dog-turkey-rice",
+  "w": "3 кг",
+  "price": 2617,
+  "name": "Wonderfur — Для взрослых собак с индейкой и рисом"
+ },
+ {
+  "id": "wf-dog-turkey-rice",
+  "w": "10 кг",
+  "price": 7439,
+  "name": "Wonderfur — Для взрослых собак с индейкой и рисом"
+ },
+ {
+  "id": "wf-dog-beef-rice",
+  "w": "800 г",
+  "price": 848,
+  "name": "Wonderfur — Для взрослых собак с говядиной и рисом"
+ },
+ {
+  "id": "wf-dog-beef-rice",
+  "w": "3 кг",
+  "price": 2666,
+  "name": "Wonderfur — Для взрослых собак с говядиной и рисом"
+ },
+ {
+  "id": "wf-dog-beef-rice",
+  "w": "10 кг",
+  "price": 7574,
+  "name": "Wonderfur — Для взрослых собак с говядиной и рисом"
+ },
+ {
+  "id": "wf-dog-small-turkey-potato",
+  "w": "400 г",
+  "price": 623,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и картофелем"
+ },
+ {
+  "id": "wf-dog-small-turkey-potato",
+  "w": "2 кг",
+  "price": 2335,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и картофелем"
+ },
+ {
+  "id": "wf-dog-small-turkey-potato",
+  "w": "5 кг",
+  "price": 4753,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и картофелем"
+ },
+ {
+  "id": "wf-dog-small-chicken-potato",
+  "w": "400 г",
+  "price": 602,
+  "name": "Wonderfur — Для собак мелких пород с курицей и картофелем"
+ },
+ {
+  "id": "wf-dog-small-chicken-potato",
+  "w": "2 кг",
+  "price": 2231,
+  "name": "Wonderfur — Для собак мелких пород с курицей и картофелем"
+ },
+ {
+  "id": "wf-dog-small-chicken-potato",
+  "w": "5 кг",
+  "price": 4524,
+  "name": "Wonderfur — Для собак мелких пород с курицей и картофелем"
+ },
+ {
+  "id": "wf-dog-small-turkey-fish",
+  "w": "400 г",
+  "price": 590,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-dog-small-turkey-fish",
+  "w": "2 кг",
+  "price": 2140,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-dog-small-turkey-fish",
+  "w": "5 кг",
+  "price": 4780,
+  "name": "Wonderfur — Для собак мелких пород с индейкой и белой рыбой"
+ },
+ {
+  "id": "wf-dog-puppy-turkey-rice",
+  "w": "400 г",
+  "price": 590,
+  "name": "Wonderfur — Для щенков мелких и средних пород с индейкой и рисом"
+ },
+ {
+  "id": "wf-dog-puppy-turkey-rice",
+  "w": "2 кг",
+  "price": 2310,
+  "name": "Wonderfur — Для щенков мелких и средних пород с индейкой и рисом"
+ },
+ {
+  "id": "wf-dog-puppy-turkey-rice",
+  "w": "5 кг",
+  "price": 4790,
+  "name": "Wonderfur — Для щенков мелких и средних пород с индейкой и рисом"
+ },
+ {
+  "id": "nt-cat-turkey-pumpkin",
+  "w": "400 г",
+  "price": 625,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и тыквой"
+ },
+ {
+  "id": "nt-cat-turkey-pumpkin",
+  "w": "1,5 кг",
+  "price": 1937,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и тыквой"
+ },
+ {
+  "id": "nt-cat-turkey-pumpkin",
+  "w": "10 кг",
+  "price": 9914,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и тыквой"
+ },
+ {
+  "id": "nt-cat-kitten-turkey-rosemary",
+  "w": "400 г",
+  "price": 632,
+  "name": "Nateria — Сухой корм для котят с индейкой и розмарином"
+ },
+ {
+  "id": "nt-cat-kitten-turkey-rosemary",
+  "w": "1,5 кг",
+  "price": 1919,
+  "name": "Nateria — Сухой корм для котят с индейкой и розмарином"
+ },
+ {
+  "id": "nt-cat-kitten-turkey-rosemary",
+  "w": "10 кг",
+  "price": 9816,
+  "name": "Nateria — Сухой корм для котят с индейкой и розмарином"
+ },
+ {
+  "id": "nt-cat-sterile-turkey-lamb",
+  "w": "400 г",
+  "price": 609,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с индейкой и ягнёнком. Оптимальный вес"
+ },
+ {
+  "id": "nt-cat-sterile-turkey-lamb",
+  "w": "1,5 кг",
+  "price": 1842,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с индейкой и ягнёнком. Оптимальный вес"
+ },
+ {
+  "id": "nt-cat-sterile-turkey-lamb",
+  "w": "10 кг",
+  "price": 9394,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с индейкой и ягнёнком. Оптимальный вес"
+ },
+ {
+  "id": "nt-cat-sterile-fish-cranberry",
+  "w": "400 г",
+  "price": 618,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с рыбой и клюквой"
+ },
+ {
+  "id": "nt-cat-sterile-fish-cranberry",
+  "w": "1,5 кг",
+  "price": 1871,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с рыбой и клюквой"
+ },
+ {
+  "id": "nt-cat-sterile-fish-cranberry",
+  "w": "10 кг",
+  "price": 9557,
+  "name": "Nateria — Сухой корм для стерилизованных кошек с рыбой и клюквой"
+ },
+ {
+  "id": "nt-cat-lamb-chamomile",
+  "w": "400 г",
+  "price": 743,
+  "name": "Nateria — Сухой корм для взрослых кошек с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-cat-lamb-chamomile",
+  "w": "1,5 кг",
+  "price": 2240,
+  "name": "Nateria — Сухой корм для взрослых кошек с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-cat-lamb-chamomile",
+  "w": "10 кг",
+  "price": 11341,
+  "name": "Nateria — Сухой корм для взрослых кошек с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-cat-diet-turkey-hypoallergenic",
+  "w": "400 г",
+  "price": 721,
+  "name": "Nateria — ДИЕТА. Сухой корм для кошек с индейкой. Гипоаллергенный"
+ },
+ {
+  "id": "nt-cat-diet-turkey-hypoallergenic",
+  "w": "1,5 кг",
+  "price": 2140,
+  "name": "Nateria — ДИЕТА. Сухой корм для кошек с индейкой. Гипоаллергенный"
+ },
+ {
+  "id": "nt-cat-diet-turkey-hypoallergenic",
+  "w": "10 кг",
+  "price": 10934,
+  "name": "Nateria — ДИЕТА. Сухой корм для кошек с индейкой. Гипоаллергенный"
+ },
+ {
+  "id": "nt-cat-turkey-lingonberry-mkb",
+  "w": "400 г",
+  "price": 748,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-cat-turkey-lingonberry-mkb",
+  "w": "1,5 кг",
+  "price": 2258,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-cat-turkey-lingonberry-mkb",
+  "w": "10 кг",
+  "price": 11437,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-cat-turkey-cranberry-mkb",
+  "w": "400 г",
+  "price": 748,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и клюквой. Профилактика МКБ"
+ },
+ {
+  "id": "nt-cat-turkey-cranberry-mkb",
+  "w": "1,5 кг",
+  "price": 2258,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и клюквой. Профилактика МКБ"
+ },
+ {
+  "id": "nt-cat-turkey-cranberry-mkb",
+  "w": "10 кг",
+  "price": 11437,
+  "name": "Nateria — Сухой корм для взрослых кошек с индейкой и клюквой. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-puppy-turkey",
+  "w": "0,5 кг",
+  "price": 605,
+  "name": "Nateria — Сухой корм для щенков с индейкой"
+ },
+ {
+  "id": "nt-dog-puppy-turkey",
+  "w": "2 кг",
+  "price": 2013,
+  "name": "Nateria — Сухой корм для щенков с индейкой"
+ },
+ {
+  "id": "nt-dog-puppy-turkey",
+  "w": "5 кг",
+  "price": 3861,
+  "name": "Nateria — Сухой корм для щенков с индейкой"
+ },
+ {
+  "id": "nt-dog-small-beef-lamb",
+  "w": "0,5 кг",
+  "price": 579,
+  "name": "Nateria — Сухой корм для взрослых собак мелких пород с говядиной и ягнёнком"
+ },
+ {
+  "id": "nt-dog-small-beef-lamb",
+  "w": "2 кг",
+  "price": 1920,
+  "name": "Nateria — Сухой корм для взрослых собак мелких пород с говядиной и ягнёнком"
+ },
+ {
+  "id": "nt-dog-small-beef-lamb",
+  "w": "10 кг",
+  "price": 7497,
+  "name": "Nateria — Сухой корм для взрослых собак мелких пород с говядиной и ягнёнком"
+ },
+ {
+  "id": "nt-dog-large-turkey-lamb-ginseng",
+  "w": "0,5 кг",
+  "price": 605,
+  "name": "Nateria — Сухой корм для взрослых собак крупных и средних пород с индейкой, ягнёнком и женьшенем"
+ },
+ {
+  "id": "nt-dog-large-turkey-lamb-ginseng",
+  "w": "2 кг",
+  "price": 2013,
+  "name": "Nateria — Сухой корм для взрослых собак крупных и средних пород с индейкой, ягнёнком и женьшенем"
+ },
+ {
+  "id": "nt-dog-large-turkey-lamb-ginseng",
+  "w": "12 кг",
+  "price": 9264,
+  "name": "Nateria — Сухой корм для взрослых собак крупных и средних пород с индейкой, ягнёнком и женьшенем"
+ },
+ {
+  "id": "nt-dog-turkey-chamomile-hypoallergenic",
+  "w": "0,5 кг",
+  "price": 738,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и цветками ромашки. Гипоаллергенный"
+ },
+ {
+  "id": "nt-dog-turkey-chamomile-hypoallergenic",
+  "w": "2 кг",
+  "price": 2394,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и цветками ромашки. Гипоаллергенный"
+ },
+ {
+  "id": "nt-dog-turkey-chamomile-hypoallergenic",
+  "w": "12 кг",
+  "price": 10919,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и цветками ромашки. Гипоаллергенный"
+ },
+ {
+  "id": "nt-dog-lamb-chamomile-sensitive",
+  "w": "0,5 кг",
+  "price": 745,
+  "name": "Nateria — Сухой корм для взрослых собак с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-dog-lamb-chamomile-sensitive",
+  "w": "2 кг",
+  "price": 2418,
+  "name": "Nateria — Сухой корм для взрослых собак с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-dog-lamb-chamomile-sensitive",
+  "w": "12 кг",
+  "price": 11035,
+  "name": "Nateria — Сухой корм для взрослых собак с ягнёнком и цветками ромашки. Чувствительное пищеварение"
+ },
+ {
+  "id": "nt-dog-turkey-lingonberry-mkb",
+  "w": "0,5 кг",
+  "price": 722,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-turkey-lingonberry-mkb",
+  "w": "2 кг",
+  "price": 2338,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-turkey-lingonberry-mkb",
+  "w": "12 кг",
+  "price": 10651,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и брусничным листом. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-turkey-cranberry-mkb",
+  "w": "0,5 кг",
+  "price": 722,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и клюквой. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-turkey-cranberry-mkb",
+  "w": "2 кг",
+  "price": 2338,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и клюквой. Профилактика МКБ"
+ },
+ {
+  "id": "nt-dog-turkey-cranberry-mkb",
+  "w": "12 кг",
+  "price": 10651,
+  "name": "Nateria — Сухой корм для взрослых собак с индейкой и клюквой. Профилактика МКБ"
+ }
+]
