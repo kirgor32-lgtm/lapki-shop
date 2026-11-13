@@ -124,8 +124,8 @@ export function head(route) {
   let title, desc, ld = [], image = OG_IMAGE, type = 'website', robots = 'index, follow, max-image-preview:large'
   switch (route.type) {
     case 'home':
-      title = `Зоомагазин «${STORE}» в СПб — корма Wonderfur и Nateria, доставка бесплатно`
-      desc = `Интернет-зоомагазин в Санкт-Петербурге: сухие корма Wonderfur и Nateria для кошек и собак — ${products.length} рецептов от ${minAll} ₽. Бесплатная доставка до пунктов 5Post.`
+      title = `Зоомагазин «${STORE}» в СПб — всё для кошек и собак, доставка бесплатно`
+      desc = `Интернет-зоомагазин в Санкт-Петербурге: товары для кошек и собак — корма, лакомства, наполнители, амуниция, игрушки, уход. Корма Wonderfur и Nateria от ${minAll} ₽. Бесплатная доставка до пунктов 5Post.`
       ld = [org, { '@type': 'WebSite', '@id': abs('#site'), url: abs(), name: BRAND, inLanguage: 'ru-RU', publisher: { '@id': abs('#store') } }, listLd(products, 'Корма Wonderfur и Nateria')]
       break
     case 'catalog':

@@ -3,8 +3,8 @@ const PickupPicker = lazy(() => import('./PickupPicker'))
 import {
   Search, ShoppingBag, Heart, User, Menu, X, Minus, Plus, ChevronRight, ChevronDown, Phone, Clock, LogOut, Package, Pencil,
   Drumstick, Scale, HeartPulse, ShieldCheck, Factory, BadgeCheck, Check, Trash2, Loader2, Send, Truck, Sparkles, Sprout, Cookie,
-  LayoutGrid, CreditCard, MapPin, Cat, Dog, Rabbit, Bird, Fish, Bean, Soup, Layers, Box, UtensilsCrossed, Link2, Volleyball, Bed,
-  Scissors, Pill, BriefcaseBusiness, Bone, Shirt, Wheat, Carrot, Grid3x3, Waves, PackageSearch,
+  LayoutGrid, CreditCard, MapPin, Cat, Dog, Bean, Soup, Layers, Box, UtensilsCrossed, Link2, Volleyball, Bed,
+  Scissors, BriefcaseBusiness, Bone, Shirt, Grid3x3, Droplets, PackageSearch, House, PawPrint,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -19,16 +19,16 @@ import { RouterProvider, useRoute, Link } from './router'
 import { sendCode, checkCode, linkedChannels, setLinked, channelNames, findAccount, saveAccount, authLive, authLiveNow, messengerInfo, botLink } from './auth'
 import { track, sendLead, crmEnabled, fetchOrderStatus } from './crm'
 import {
-  BASE, STORE, contacts, seller, products, animals, categories, catOf, catPath, brands, brandList, brandPath, inCat, countAnimal,
+  BASE, STORE, contacts, seller, products, animals, categories, groups, picks, catOf, catPath, brands, brandList, brandPath, inCat, countAnimal,
   searchHints, perks, posts, contactTopics, faq, pages, productPath, minPrice, img, minAll,
 } from './data'
 
 const icons = {
   Drumstick, Scale, HeartPulse, ShieldCheck, Factory, BadgeCheck, Truck, CreditCard, Sparkles, Send, Cookie,
-  Cat, Dog, Rabbit, Bird, Fish, Bean, Soup, Layers, Box, UtensilsCrossed, Link2, Volleyball, Bed, Scissors, Pill,
-  BriefcaseBusiness, Bone, Shirt, Wheat, Carrot, Grid3x3, Waves,
+  Cat, Dog, Bean, Soup, Layers, Box, UtensilsCrossed, Link2, Volleyball, Bed, Scissors, Droplets,
+  BriefcaseBusiness, Bone, Shirt, Grid3x3,
 }
-// Основная кнопка — малиновая, как на mokryinos.ru; вторичная — графитовая
+// Основная кнопка — синяя (фирменный цвет «Лапок»); вторичная — графитовая
 const inkBtn = 'h-11 rounded-full bg-violet-dark px-5 text-sm font-medium text-white hover:bg-violet'
 const ALL = { animal: 'all', brand: 'all', age: 'all', q: '' }
 const byId = (id) => products.find((p) => p.id === id)
@@ -78,9 +78,11 @@ function Shell() {
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-white focus:p-3">К содержимому</a>
       <Header filter={filter} nav={nav} />
-      <main id="main">{page}</main>
+      <main id="main" className="max-lg:pb-[60px]">{page}</main>
       <Footer nav={nav} />
       <Panels nav={nav} />
+      <CatalogSheet />
+      <MobileTabs />
       <Messengers />
       <CookieBanner />
     </>
@@ -115,20 +117,40 @@ function MessengerButtons({ className, stack }) {
   )
 }
 
-/* ---------------- логотип: первая буква в скруглённом квадрате + название (как у иконки вкладки) ---------------- */
+/* ---------------- логотип: свой знак (лапка с сердцем-подушечкой в синем скруглённом квадрате) + надпись ----------------
+   Референсы — логотипы сетей «Четыре лапы», «Бетховен», Petco, Fressnapf, Zooplus: простой знак питомца,
+   отдельный от надписи (работает как иконка приложения), надпись строчными, два цвета. Знак нарисован с нуля. */
+export function LogoMark({ className }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden>
+      <rect width="64" height="64" rx="16" fill="#1f5fd6" />
+      <g fill="#fff">
+        <ellipse cx="17.5" cy="27" rx="5.6" ry="7.2" transform="rotate(-24 17.5 27)" />
+        <ellipse cx="27" cy="17.5" rx="5.8" ry="7.6" transform="rotate(-8 27 17.5)" />
+        <ellipse cx="38.5" cy="17.5" rx="5.8" ry="7.6" transform="rotate(8 38.5 17.5)" />
+        <ellipse cx="48" cy="27" rx="5.6" ry="7.2" transform="rotate(24 48 27)" />
+        <path d="M32.7 53.5c-1 .8-2.4.8-3.4 0C21.6 47.4 16.5 43 16.5 37.3c0-4.6 3.5-8 7.7-8 3.4 0 5.9 2 7.8 4.7 1.9-2.7 4.4-4.7 7.8-4.7 4.2 0 7.7 3.4 7.7 8 0 5.7-5.1 10.1-14.8 16.2z" />
+      </g>
+      <circle cx="51.5" cy="51.5" r="5" fill="#ffb02e" />
+    </svg>
+  )
+}
 function Logo({ light, onClick }) {
   return (
-    <Link to="" onClick={onClick} className="flex shrink-0 items-center gap-2 leading-none" aria-label={`${STORE} — на главную`}>
-      <span className="flex size-9 items-center justify-center rounded-[10px] bg-violet-dark text-[20px] font-black text-white lg:size-11 lg:text-[24px]">Л</span>
+    <Link to="" onClick={onClick} className="flex shrink-0 items-center gap-2.5 leading-none" aria-label={`${STORE} — на главную`}>
+      <LogoMark className="size-10 lg:size-12" />
       <span className="flex flex-col">
-        <span className={cn('text-[20px] font-black tracking-[-0.02em] lg:text-[26px]', light && 'text-white')}>{STORE}</span>
-        <span className={cn('mt-0.5 hidden text-[10px] font-medium uppercase tracking-[0.24em] sm:block', light ? 'text-white/60' : 'text-txt-2')}>зоомагазин</span>
+        <span className={cn('text-[24px] font-black lowercase tracking-[-0.045em] lg:text-[30px]', light ? 'text-white' : 'text-ink')}>{STORE.toLowerCase()}</span>
+        <span className={cn('mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em]', light ? 'text-white/60' : 'text-violet-dark')}>зоомагазин</span>
       </span>
     </Link>
   )
 }
 
-/* ---------------- шапка: как у mokryinos.ru — кнопка «Каталог» с меню «питомец → раздел», поиск, иконки ---------------- */
+// Быстрые ссылки под шапкой (как строка разделов у 4lapy.ru)
+const quickLinks = [['cat', 'dry', 'Корм для кошек'], ['dog', 'dry', 'Корм для собак'], ['cat', 'litter', 'Наполнители'], ['cat', 'scratch', 'Когтеточки'], ['dog', 'ammo', 'Амуниция для собак'], ['dog', 'clothes', 'Одежда для собак']]
+
+/* ---------------- шапка: кнопка «Каталог» с меню «Кошкам/Собакам → разделы» (как у «Четыре лапы»), поиск, иконки ---------------- */
 function Header({ filter, nav }) {
   const st = useStore()
   const { route } = useRoute()
@@ -145,93 +167,203 @@ function Header({ filter, nav }) {
   }, [mega])
   return (
     <header ref={box} className="sticky top-0 z-40 bg-white shadow-[0_1px_0_#ebebeb]">
-      <div className="bg-ink text-[12px] text-white">
-        <div className="wrap flex h-8 items-center justify-between gap-4">
-          <span className="flex min-w-0 items-center gap-1.5 truncate"><MapPin className="size-3.5 shrink-0" /><span className="truncate"><span className="sm:hidden">СПб · доставка в 5Post бесплатно</span><span className="hidden sm:inline">Санкт-Петербург · бесплатная доставка до пунктов 5Post</span></span></span>
-          <div className="hidden items-center gap-5 md:flex">
-            <Link to={pages.delivery.path} className="hover:underline">Доставка и оплата</Link>
-            <Link to={pages.about.path} className="hover:underline">О магазине</Link>
-            <Link to={pages.contacts.path} className="hover:underline">Контакты</Link>
-            <a href={contacts.phoneHref} className="whitespace-nowrap font-semibold hover:underline">{contacts.phone}</a>
+      <div className="hidden bg-gray-1 text-[13px] lg:block">
+        <div className="wrap flex h-9 items-center justify-between gap-4">
+          <span className="flex items-center gap-1.5 text-txt-2"><MapPin className="size-4 text-violet-dark" />Санкт-Петербург · бесплатная доставка до пунктов 5Post</span>
+          <div className="flex items-center gap-6">
+            <Link to={pages.delivery.path} className="hover:text-violet-dark">Доставка и оплата</Link>
+            <Link to={pages.returns.path} className="hover:text-violet-dark">Возврат</Link>
+            <Link to={pages.about.path} className="hover:text-violet-dark">О магазине</Link>
+            <Link to={pages.contacts.path} className="hover:text-violet-dark">Контакты</Link>
+            <a href={contacts.phoneHref} className="whitespace-nowrap font-semibold hover:text-violet-dark">{contacts.phone}</a>
           </div>
         </div>
       </div>
-      <div className="wrap flex h-[64px] items-center gap-3 lg:h-[80px] lg:gap-5">
+      <div className="wrap flex h-[60px] items-center gap-3 lg:h-[84px] lg:gap-5">
         <button className="-ml-2 flex size-11 items-center justify-center lg:hidden" onClick={() => st.setPanel('menu')} aria-label="Открыть меню"><Menu /></button>
         <Logo />
         <button onClick={() => setMega(!mega)} aria-expanded={mega} aria-controls="mega"
-          className="hidden h-12 shrink-0 items-center gap-2 rounded-full bg-violet-dark px-6 text-[15px] font-semibold text-white hover:bg-violet lg:flex">
+          className="hidden h-12 shrink-0 items-center gap-2 rounded-full bg-violet-dark px-6 text-[15px] font-semibold text-white transition hover:bg-violet lg:flex">
           {mega ? <X className="size-5" /> : <LayoutGrid className="size-5" />} Каталог
         </button>
         <div className="hidden flex-1 lg:block"><SearchBox filter={filter} nav={nav} /></div>
-        <div className="ml-auto flex items-center gap-0.5 lg:ml-0 lg:gap-1">
+        <a href={contacts.phoneHref} aria-label="Позвонить" className="ml-auto flex size-11 items-center justify-center lg:hidden"><Phone className="size-[22px] stroke-[1.6]" /></a>
+        <div className="hidden items-center gap-1 lg:flex">
           <IconBtn label="избранное" n={st.fav.length} onClick={() => st.setPanel('fav')}><Heart /></IconBtn>
           <IconBtn label={st.user ? 'профиль' : 'войти'} dot={!!st.user} onClick={() => st.setPanel('profile')}><User /></IconBtn>
           <IconBtn label="корзина" n={st.count} onClick={() => st.setPanel('cart')}><ShoppingBag /></IconBtn>
         </div>
       </div>
       <div className="wrap pb-3 lg:hidden"><SearchBox filter={filter} nav={nav} /></div>
-      {/* разделы по питомцам — только на компьютере */}
-      <nav aria-label="Питомцы" className="hidden border-t border-gray-2 lg:block">
+      <nav aria-label="Разделы" className="hidden border-t border-gray-2 lg:block">
         <div className="wrap no-scrollbar flex h-12 items-center gap-7 overflow-x-auto text-[15px]">
-          {animalKeys.map((a) => {
+          {Object.keys(animals).map((a) => {
             const A = animals[a], I = icons[A.icon]
-            return <Link key={a} to={A.path} className="flex items-center gap-2 whitespace-nowrap hover:text-violet-dark"><I className="size-[18px] stroke-[1.6]" />{A.name}</Link>
+            return <Link key={a} to={A.path} className="flex items-center gap-2 whitespace-nowrap font-semibold hover:text-violet-dark"><I className="size-[18px] stroke-[1.7]" />{A.menu}</Link>
           })}
-          <span className="h-5 w-px bg-gray-2" />
+          <span className="h-5 w-px shrink-0 bg-gray-2" />
+          {quickLinks.map(([a, c, l]) => <Link key={a + c} to={catPath(a, c)} className="whitespace-nowrap hover:text-violet-dark">{l}</Link>)}
+          <span className="h-5 w-px shrink-0 bg-gray-2" />
           <Link to={pages.brands.path} className="whitespace-nowrap hover:text-violet-dark">Бренды</Link>
-          {brandList.map((b) => <Link key={b.slug} to={brandPath(b)} className="whitespace-nowrap hover:text-violet-dark">{b.name}</Link>)}
           <Link to={pages.blog.path} className="whitespace-nowrap hover:text-violet-dark">Блог</Link>
         </div>
       </nav>
-      {mega && <MegaMenu />}
+      {mega && <MegaMenu nav={nav} />}
     </header>
   )
 }
 
-// Выпадающее меню каталога: слева питомцы, справа разделы выбранного питомца (как на mokryinos.ru)
-function MegaMenu() {
+const catCount = (a, c) => inCat(a, c).length
+
+// Разделы питомца, разложенные по группам (корм, туалет, дом…) — для мега-меню, каталога на телефоне и страницы питомца
+const grouped = (a) => groups.map((g) => [g, categories[a].filter((c) => c.group === g)]).filter(([, l]) => l.length)
+
+// Выпадающее меню каталога: слева Кошкам/Собакам, справа группы разделов колонками, сбоку бренды кормов и подборки
+function MegaMenu({ nav }) {
   const [cur, setCur] = useState('cat')
   const A = animals[cur]
   return (
-    <div id="mega" className="absolute inset-x-0 top-full hidden border-t border-gray-2 bg-white shadow-[0_24px_40px_rgba(43,43,48,.12)] lg:block">
-      <div className="wrap grid grid-cols-[260px_1fr] gap-8 py-6">
-        <ul className="border-r border-gray-2 pr-4">
-          {animalKeys.map((a) => {
+    <div id="mega" className="absolute inset-x-0 top-full hidden max-h-[calc(100vh-180px)] overflow-y-auto border-t border-gray-2 bg-white shadow-[0_0_0_100vmax_rgba(30,32,38,.38)] lg:block">
+      <div className="wrap grid grid-cols-[220px_1fr_240px] gap-8 py-6">
+        <ul className="space-y-1 border-r border-gray-2 pr-4">
+          {Object.keys(animals).map((a) => {
             const I = icons[animals[a].icon]
             return (
               <li key={a}>
                 <Link to={animals[a].path} onMouseEnter={() => setCur(a)} onFocus={() => setCur(a)}
-                  className={cn('flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px]', cur === a ? 'bg-violet-soft font-semibold text-violet-dark' : 'hover:bg-gray-1')}>
-                  <I className="size-5 stroke-[1.6]" /> <span className="flex-1">{animals[a].name}</span><ChevronRight className="size-4 opacity-50" />
+                  className={cn('flex items-center gap-3 rounded-xl px-3 py-3 text-[16px]', cur === a ? 'bg-violet-soft font-semibold text-violet-dark' : 'hover:bg-gray-1')}>
+                  <I className="size-6 stroke-[1.6]" /> <span className="flex-1">{animals[a].menu}</span><ChevronRight className="size-4 opacity-60" />
                 </Link>
               </li>
             )
           })}
         </ul>
         <div>
-          <Link to={A.path} className="text-xl font-bold hover:text-violet-dark">Все товары {A.of}</Link>
-          <ul className="mt-4 grid grid-cols-3 gap-x-8 gap-y-1 xl:grid-cols-4">
-            {categories[cur].map((c) => {
-              const n = inCat(cur, c.id).length
-              return (
-                <li key={c.id}>
-                  <Link to={catPath(cur, c.id)} className="flex items-baseline justify-between gap-2 rounded-md py-1.5 text-[15px] hover:text-violet-dark">
-                    <span>{c.name}</span><span className="text-xs text-txt-2">{n || 'скоро'}</span>
-                  </Link>
-                  {/* в разделах с товарами — бренды, как на mokryinos.ru */}
-                  {n > 0 && (
-                    <div className="mb-2 flex flex-wrap gap-x-3 text-sm text-txt-2">
-                      {brandList.filter((b) => inCat(cur, c.id).some((p) => p.brand === b.name)).map((b) => <Link key={b.slug} to={brandPath(b)} className="hover:text-violet-dark">{b.name}</Link>)}
-                    </div>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
+          <Link to={A.path} className="inline-flex items-center gap-1 text-[22px] font-bold hover:text-violet-dark">Все товары {A.of} <ChevronRight className="size-5" /></Link>
+          <div className="mt-4 columns-3 gap-8 xl:columns-4">
+            {grouped(cur).map(([g, list]) => (
+              <div key={g} className="mb-5 break-inside-avoid">
+                <div className="mb-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-txt-2">{g}</div>
+                {list.map((c) => {
+                  const n = catCount(cur, c.id)
+                  return (
+                    <Link key={c.id} to={catPath(cur, c.id)} className="group block rounded-md py-1">
+                      <span className="flex items-baseline justify-between gap-2 text-[15px] font-medium group-hover:text-violet-dark">{c.name}<span className={cn('text-xs font-normal', n ? 'text-violet-dark' : 'text-txt-2')}>{n || 'скоро'}</span></span>
+                      <span className="block text-[13px] leading-snug text-txt-2">{c.subs.join(', ')}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-5 border-l border-gray-2 pl-6">
+          <div>
+            <div className="mb-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-txt-2">Бренды кормов</div>
+            <div className="space-y-2">
+              {brandList.map((b) => (
+                <Link key={b.slug} to={brandPath(b)} className={cn('flex items-center gap-3 rounded-xl p-2 pr-3 transition hover:ring-2 hover:ring-violet-dark/30', b.tone)}>
+                  <img src={img(b.hero[0])} {...IMG} alt="" className="h-12 w-auto" />
+                  <span className="text-[17px] font-black tracking-[-0.02em]">{b.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="mb-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-txt-2">Подобрать корм</div>
+            <ul className="space-y-1 text-[15px]">
+              {picks.filter((p) => p.animal === cur).map((p) => <li key={p.title}><PickLink p={p} nav={nav} className="hover:text-violet-dark" /></li>)}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+  )
+}
+
+// Ссылка-подборка: ведёт в каталог с поиском по свойству корма (у 4lapy — «Что подобрать для вашего питомца?»)
+const pickCount = (p) => products.filter((x) => matches(x, { animal: p.animal, q: p.q })).length
+function PickLink({ p, nav, className, children, onClick }) {
+  return (
+    <a href={`${BASE}${pages.catalog.path}`} className={className}
+      onClick={(e) => { e.preventDefault(); onClick?.(); nav.show({ animal: p.animal, q: p.q }) }}>
+      {children || p.title}
+    </a>
+  )
+}
+
+// Нижнее меню на телефоне — как в приложениях «Четыре лапы» и «Мокрый нос»: главная, каталог, корзина, избранное, профиль
+function MobileTabs() {
+  const st = useStore()
+  const { route, navigate } = useRoute()
+  const items = [
+    ['Главная', House, () => { st.setPanel(null); navigate('') }, route.type === 'home' && !st.panel],
+    ['Каталог', LayoutGrid, () => st.setPanel(st.panel === 'catalog' ? null : 'catalog'), st.panel === 'catalog'],
+    ['Корзина', ShoppingBag, () => st.setPanel('cart'), st.panel === 'cart', st.count],
+    ['Избранное', Heart, () => st.setPanel('fav'), st.panel === 'fav', st.fav.length],
+    [st.user ? 'Профиль' : 'Войти', User, () => st.setPanel('profile'), st.panel === 'profile'],
+  ]
+  return (
+    <nav aria-label="Меню приложения" className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-2 bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
+      <div className="grid h-[60px] grid-cols-5">
+        {items.map(([l, I, go, on, n]) => (
+          <button key={l} onClick={go} aria-current={on ? 'page' : undefined} className={cn('relative flex flex-col items-center justify-center gap-1 text-[11px]', on ? 'text-violet-dark' : 'text-txt-2')}>
+            <I className="size-6 stroke-[1.6]" />{l}
+            {!!n && <span className="absolute left-1/2 top-1.5 ml-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-violet-dark px-1 text-[10px] font-semibold text-white">{n}</span>}
+          </button>
+        ))}
+      </div>
+    </nav>
+  )
+}
+
+// Каталог на телефоне: вкладки Кошкам/Собакам, разделы по группам, бренды и подборки
+function CatalogSheet() {
+  const st = useStore()
+  const [cur, setCur] = useState('cat')
+  const close = () => st.setPanel(null)
+  return (
+    <Sheet open={st.panel === 'catalog'} onOpenChange={(o) => !o && close()}>
+      <SheetContent side="left" className="flex w-full flex-col gap-0 p-0 data-[side=left]:w-full sm:max-w-[420px] data-[side=left]:sm:max-w-[420px]">
+        <SheetHeader className="border-b border-gray-2 p-4">
+          <SheetTitle className="text-2xl font-extrabold">Каталог</SheetTitle>
+          <SheetDescription className="sr-only">Разделы для кошек и собак</SheetDescription>
+          <div role="tablist" className="mt-2 grid grid-cols-2 gap-2">
+            {Object.keys(animals).map((a) => {
+              const I = icons[animals[a].icon]
+              return (
+                <button key={a} role="tab" aria-selected={cur === a} onClick={() => setCur(a)}
+                  className={cn('flex h-12 items-center justify-center gap-2 rounded-xl text-[16px] font-semibold', cur === a ? 'bg-violet-dark text-white' : 'bg-gray-1')}>
+                  <I className="size-5" />{animals[a].menu}
+                </button>
+              )
+            })}
+          </div>
+        </SheetHeader>
+        <div className="flex-1 overflow-y-auto px-4 pb-6">
+          <Link to={animals[cur].path} onClick={close} className="flex items-center justify-between py-4 text-[17px] font-bold text-violet-dark">Все товары {animals[cur].of}<ChevronRight className="size-5" /></Link>
+          {grouped(cur).map(([g, list]) => (
+            <div key={g} className="mb-3">
+              <div className="mb-1 text-[12px] font-semibold uppercase tracking-[0.12em] text-txt-2">{g}</div>
+              {list.map((c) => {
+                const I = icons[c.icon] || Package, n = catCount(cur, c.id)
+                return (
+                  <Link key={c.id} to={catPath(cur, c.id)} onClick={close} className="flex items-center gap-3 border-b border-gray-2 py-3 last:border-0">
+                    <span className={cn('flex size-10 shrink-0 items-center justify-center rounded-xl', n ? 'bg-violet-soft text-violet-dark' : 'bg-gray-1 text-txt-2')}><I className="size-5 stroke-[1.6]" /></span>
+                    <span className="flex-1 text-[15px] font-medium">{c.name}</span>
+                    <span className={cn('text-xs', n ? 'text-violet-dark' : 'text-txt-2')}>{n || 'скоро'}</span>
+                  </Link>
+                )
+              })}
+            </div>
+          ))}
+          <div className="mb-1 mt-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-txt-2">Бренды кормов</div>
+          <div className="grid grid-cols-2 gap-2">
+            {brandList.map((b) => <Link key={b.slug} to={brandPath(b)} onClick={close} className={cn('rounded-xl px-3 py-3 text-center text-[16px] font-black', b.tone)}>{b.name}</Link>)}
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
   )
 }
 
@@ -359,15 +491,20 @@ function Crumbs({ items }) {
 }
 
 /* ---------------- главная ---------------- */
+// Главная — по логике 4lapy.ru и mokryinos.ru: сначала вход в каталог по питомцу и разделам,
+// затем «подобрать корм», товары в наличии, бренды (лишь один из блоков), сервис, блог, вопросы.
+// Без выдуманных акций и «хитов»: где товаров нет — честное «скоро».
 function Home({ nav, topic, setTopic }) {
   return (
     <>
       <Hero />
       <Perks />
-      <AnimalTiles title="Каталог для питомцев" />
-      <PopularCats />
-      {brandList.map((b) => <Shelf key={b.slug} b={b} />)}
+      <PetCats animal="cat" />
+      <PetCats animal="dog" />
+      <Picks nav={nav} />
+      <InStock />
       <BrandsBlock />
+      <ServiceBlock />
       <BlogStrip />
       <Contacts topic={topic} setTopic={setTopic} />
       <FaqList limit={4} />
@@ -376,36 +513,34 @@ function Home({ nav, topic, setTopic }) {
   )
 }
 
-// Баннеры брендов — как слайды на mokryinos.ru, но без выдуманных акций: бренд, что это, кнопка в каталог бренда
-function BrandBanner({ b, h1 }) {
-  const H = h1 ? 'h1' : 'h2'
-  const n = products.filter((p) => p.brand === b.name).length
-  return (
-    <Link to={brandPath(b)} className={cn('group relative grid min-h-[230px] grid-cols-[minmax(0,1fr)_42%] overflow-hidden rounded-2xl sm:min-h-[300px] xl:min-h-[340px]', b.tone)}>
-      <div className="relative z-10 flex flex-col p-5 sm:p-8 xl:p-10">
-        <span className="kicker text-[10px] text-txt-2 sm:text-[12px]">{b.tagline}</span>
-        <H className="mt-2 text-[30px] font-black leading-none tracking-[-0.03em] sm:text-[44px] xl:text-[56px]">{b.name}</H>
-        <p className="mt-3 max-w-[340px] text-[14px] leading-snug text-txt-2 sm:text-[16px]">{b.short}</p>
-        <span className="mt-auto inline-flex h-10 w-fit items-center gap-1 rounded-full bg-violet-dark px-5 pt-0 text-[14px] font-semibold text-white transition group-hover:bg-violet sm:h-11 sm:text-[15px]">
-          {n} {plural(n, 'рецепт', 'рецепта', 'рецептов')} <ChevronRight className="size-4" />
-        </span>
-      </div>
-      <div className="pointer-events-none relative flex items-end justify-center pr-2 pt-6 sm:pr-4">
-        {b.hero.slice(0, 2).map((id, i) => (
-          <img key={id} src={img(id)} {...IMG} alt={i === 0 ? `Упаковки кормов ${b.name}` : ''} fetchPriority="high"
-            className={cn('relative h-auto min-w-0 object-contain object-bottom transition duration-300 group-hover:scale-[1.03]', i === 0 ? 'z-10 w-[58%]' : '-ml-[18%] mb-0 w-[52%] translate-y-2')} />
-        ))}
-      </div>
-    </Link>
-  )
-}
-
+// Первый экран: большой баннер магазина + два входа «Кошкам / Собакам» (как плитки питомцев у сетей)
 function Hero() {
   return (
     <section className="wrap pt-4 lg:pt-6">
-      <h1 className="sr-only">Зоомагазин «{STORE}» в Санкт-Петербурге — корма Wonderfur и Nateria</h1>
-      <div className="grid gap-3 md:grid-cols-2 lg:gap-5">
-        {brandList.map((b) => <BrandBanner key={b.slug} b={b} />)}
+      <div className="grid gap-3 lg:grid-cols-[1.35fr_1fr] lg:gap-5">
+        <div className="relative overflow-hidden rounded-2xl bg-violet-dark p-6 text-white sm:p-10">
+          <PawPrint aria-hidden className="pointer-events-none absolute -bottom-10 -right-8 size-[220px] rotate-[-18deg] text-white/10 sm:size-[300px]" />
+          <span className="kicker text-[11px] text-white/70 sm:text-[12px]">Зоомагазин в Санкт-Петербурге</span>
+          <h1 className="mt-3 max-w-[560px] text-[30px] font-black leading-[1.05] tracking-[-0.03em] sm:text-[46px]">Всё для кошек и собак</h1>
+          <p className="mt-3 max-w-[460px] text-[15px] leading-snug text-white/85 sm:text-[17px]">Корма, лакомства, наполнители, амуниция, игрушки и товары для ухода. Бесплатная доставка до пунктов выдачи 5Post.</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Link to={pages.catalog.path} className="inline-flex h-11 items-center gap-1 rounded-full bg-white px-5 text-[15px] font-semibold text-violet-dark hover:bg-violet-soft">Перейти в каталог <ChevronRight className="size-4" /></Link>
+            <Link to={pages.delivery.path} className="inline-flex h-11 items-center rounded-full border border-white/40 px-5 text-[15px] font-semibold text-white hover:bg-white/10">Доставка и оплата</Link>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-5">
+          {animalKeys.map((a) => {
+            const A = animals[a], I = icons[A.icon], n = countAnimal(a)
+            return (
+              <Link key={a} to={A.path} className="group relative flex min-h-[150px] flex-col justify-between overflow-hidden rounded-2xl bg-violet-soft p-5 transition hover:ring-2 hover:ring-violet-dark/40 sm:p-6">
+                <I aria-hidden className="absolute -bottom-4 -right-3 size-[120px] stroke-[1.1] text-violet-dark/15 transition group-hover:scale-105 sm:size-[150px]" />
+                <span className="relative text-[24px] font-black tracking-[-0.02em] sm:text-[32px]">{A.menu}</span>
+                <span className="relative text-[14px] text-txt-2">{categories[a].length} разделов · {goods(n)}</span>
+                <span className="relative mt-3 inline-flex w-fit items-center gap-1 text-[15px] font-semibold text-violet-dark">Смотреть <ChevronRight className="size-4 transition group-hover:translate-x-0.5" /></span>
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
@@ -429,18 +564,118 @@ function Perks() {
   )
 }
 
+// Плитка раздела: если в разделе есть товары — фото упаковки из него, иначе значок и «скоро»
+function CatCard({ animal, c }) {
+  const list = inCat(animal, c.id), n = list.length, I = icons[c.icon] || Package
+  return (
+    <Link to={catPath(animal, c.id)} className="group relative flex min-h-[148px] flex-col overflow-hidden rounded-2xl bg-gray-1 p-4 transition hover:bg-violet-soft sm:min-h-[170px]">
+      <span className="relative z-10 max-w-[70%] text-[15px] font-bold leading-tight sm:text-[16px]">{c.name}</span>
+      <span className={cn('relative z-10 mt-1 text-[12px]', n ? 'text-violet-dark' : 'text-txt-2')}>{n ? goods(n) : 'раздел пополняется'}</span>
+      {n
+        ? <img src={img(list[0].id)} {...IMG} loading="lazy" alt="" className="absolute -bottom-3 right-2 h-[78%] w-auto object-contain drop-shadow-sm transition group-hover:scale-[1.04]" />
+        : <I aria-hidden className="absolute bottom-3 right-3 size-14 stroke-[1.3] text-violet-dark/35 transition group-hover:scale-105 sm:size-16" />}
+    </Link>
+  )
+}
+
+// «Кошкам» / «Собакам» — все разделы питомца плитками (как блоки категорий на главной у сетей)
+function PetCats({ animal }) {
+  const A = animals[animal]
+  return (
+    <section className="wrap pt-12">
+      <SectionTitle more={[`Все товары ${A.of}`, A.path]}>{A.menu}</SectionTitle>
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        {categories[animal].map((c) => <CatCard key={c.id} animal={animal} c={c} />)}
+      </div>
+    </section>
+  )
+}
+
+// «Что подобрать для вашего питомца?» — подборки по реальным свойствам кормов; пустые не показываем
+function Picks({ nav }) {
+  const list = picks.map((p) => ({ ...p, n: pickCount(p) })).filter((p) => p.n)
+  if (!list.length) return null
+  return (
+    <section className="wrap pt-12">
+      <SectionTitle sub="Подборки кормов по возрасту и особенностям питомца">Что подобрать питомцу?</SectionTitle>
+      <div className="no-scrollbar -mx-4 mt-6 flex gap-3 overflow-x-auto px-4 md:mx-0 md:grid md:grid-cols-4 md:px-0">
+        {list.map((p) => {
+          const I = icons[animals[p.animal].icon]
+          return (
+            <PickLink key={p.title} p={p} nav={nav} className="group flex min-w-[200px] items-center gap-3 rounded-xl border border-gray-2 px-4 py-3.5 transition hover:border-violet-dark md:min-w-0">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violet-soft text-violet-dark"><I className="size-5 stroke-[1.6]" /></span>
+              <span className="min-w-0 flex-1"><span className="block text-[15px] font-semibold leading-tight">{p.title}</span><span className="text-[13px] text-txt-2">{goods(p.n)}</span></span>
+            </PickLink>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+// Товары в наличии — по очереди кошачьи и собачьи, без «хитов» и выдуманных рейтингов
+function InStock() {
+  const cats = products.filter((p) => p.animal === 'cat'), dogs = products.filter((p) => p.animal === 'dog')
+  const mix = []
+  for (let i = 0; mix.length < 10 && (i < cats.length || i < dogs.length); i++) { cats[i] && mix.push(cats[i]); dogs[i] && mix.push(dogs[i]) }
+  return (
+    <section className="wrap pt-14">
+      <SectionTitle more={['Весь каталог', pages.catalog.path]}>Сейчас в наличии</SectionTitle>
+      <div className="no-scrollbar -mx-4 mt-6 grid auto-cols-[46%] grid-flow-col gap-x-3 overflow-x-auto px-4 sm:auto-cols-[31%] sm:gap-x-5 md:mx-0 md:grid-flow-row md:grid-cols-4 md:px-0 xl:grid-cols-5">
+        {mix.slice(0, 10).map((p, i) => <div key={p.id} className={cn('flex', i >= 8 && 'md:hidden xl:flex')}><ProductCard p={p} /></div>)}
+      </div>
+    </section>
+  )
+}
+
+function BrandsBlock() {
+  return (
+    <section className="wrap pt-16">
+      <SectionTitle more={['Все бренды', pages.brands.path]}>Бренды кормов</SectionTitle>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {brandList.map((b) => <BrandCard key={b.slug} b={b} />)}
+      </div>
+    </section>
+  )
+}
+
+// Сервис магазина — то, что реально работает на сайте (как блок «Покупайте выгодно и удобно» у сетей, без акций)
+function ServiceBlock() {
+  const items = [
+    [Truck, 'Доставка', 'Бесплатно до пунктов выдачи 5Post в Петербурге', pages.delivery.path],
+    [CreditCard, 'Оплата', 'Картой и по СБП при оформлении заказа', pages.delivery.path],
+    [PackageSearch, 'Не нашли товар?', 'Напишите, что ищете, — подскажем', pages.contacts.path],
+    [ShieldCheck, 'Возврат', 'Как вернуть или обменять товар', pages.returns.path],
+  ]
+  return (
+    <section className="wrap pt-16">
+      <SectionTitle>Покупать удобно</SectionTitle>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(([I, t, d, to]) => (
+          <Link key={t} to={to} className="group rounded-2xl bg-gray-1 p-5 transition hover:bg-violet-soft">
+            <I className="size-7 stroke-[1.5] text-violet-dark" />
+            <span className="mt-4 block text-[17px] font-bold">{t}</span>
+            <span className="mt-1 block text-[14px] leading-snug text-txt-2">{d}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+// Плитки питомцев (для страницы каталога)
 function AnimalTiles({ title, as }) {
   return (
     <section className="wrap pt-12">
       {title && <SectionTitle as={as}>{title}</SectionTitle>}
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="mt-6 grid grid-cols-2 gap-3">
         {animalKeys.map((a) => {
           const A = animals[a], I = icons[A.icon], n = countAnimal(a)
           return (
-            <Link key={a} to={A.path} className="group flex flex-col items-start gap-4 rounded-2xl bg-gray-1 p-5 transition hover:bg-violet-soft">
+            <Link key={a} to={A.path} className="group flex items-center gap-4 rounded-2xl bg-gray-1 p-5 transition hover:bg-violet-soft">
               <span className="flex size-14 items-center justify-center rounded-full bg-white text-violet-dark transition group-hover:scale-105"><I className="size-7 stroke-[1.5]" /></span>
               <span>
-                <span className="block text-[17px] font-bold leading-tight">{A.name}</span>
+                <span className="block text-[18px] font-bold leading-tight">{A.name}</span>
                 <span className="text-[13px] text-txt-2">{n ? goods(n) : 'раздел пополняется'}</span>
               </span>
             </Link>
@@ -466,40 +701,27 @@ function CatTile({ animal, c, withAnimal }) {
   )
 }
 
-function PopularCats() {
-  const list = [['cat', 'dry'], ['dog', 'dry'], ['cat', 'litter'], ['dog', 'ammo'], ['cat', 'treats'], ['dog', 'toys'], ['cat', 'beds'], ['dog', 'vet']]
+// Баннеры брендов — как слайды на mokryinos.ru, но без выдуманных акций: бренд, что это, кнопка в каталог бренда
+function BrandBanner({ b, h1 }) {
+  const H = h1 ? 'h1' : 'h2'
+  const n = products.filter((p) => p.brand === b.name).length
   return (
-    <section className="wrap pt-12">
-      <SectionTitle more={['Весь каталог', pages.catalog.path]}>Популярные разделы</SectionTitle>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {list.map(([a, c]) => <CatTile key={a + c} animal={a} c={catOf(a, c)} withAnimal />)}
+    <Link to={brandPath(b)} className={cn('group relative grid min-h-[230px] grid-cols-[minmax(0,1fr)_42%] overflow-hidden rounded-2xl sm:min-h-[300px] xl:min-h-[340px]', b.tone)}>
+      <div className="relative z-10 flex flex-col p-5 sm:p-8 xl:p-10">
+        <span className="kicker text-[10px] text-txt-2 sm:text-[12px]">{b.tagline}</span>
+        <H className="mt-2 text-[30px] font-black leading-none tracking-[-0.03em] sm:text-[44px] xl:text-[56px]">{b.name}</H>
+        <p className="mt-3 max-w-[340px] text-[14px] leading-snug text-txt-2 sm:text-[16px]">{b.short}</p>
+        <span className="mt-auto inline-flex h-10 w-fit items-center gap-1 rounded-full bg-violet-dark px-5 pt-0 text-[14px] font-semibold text-white transition group-hover:bg-violet sm:h-11 sm:text-[15px]">
+          {n} {plural(n, 'рецепт', 'рецепта', 'рецептов')} <ChevronRight className="size-4" />
+        </span>
       </div>
-    </section>
-  )
-}
-
-// Полка товаров бренда на главной: первые 5 рецептов + ссылка на страницу бренда
-function Shelf({ b }) {
-  const list = products.filter((p) => p.brand === b.name)
-  const pick = [...list.filter((p) => p.animal === 'cat').slice(0, 3), ...list.filter((p) => p.animal === 'dog').slice(0, 2)]
-  return (
-    <section className="wrap pt-14">
-      <SectionTitle more={[`Все корма ${b.name}`, brandPath(b)]}>Корма {b.name}</SectionTitle>
-      <div className="no-scrollbar -mx-4 mt-6 grid auto-cols-[46%] grid-flow-col gap-x-3 overflow-x-auto px-4 sm:auto-cols-[31%] sm:gap-x-5 md:mx-0 md:grid-flow-row md:grid-cols-4 md:px-0 xl:grid-cols-5">
-        {pick.map((p, i) => <div key={p.id} className={cn('flex', i === 4 && 'md:hidden xl:flex')}><ProductCard p={p} /></div>)}
+      <div className="pointer-events-none relative flex items-end justify-center pr-2 pt-6 sm:pr-4">
+        {b.hero.slice(0, 2).map((id, i) => (
+          <img key={id} src={img(id)} {...IMG} alt={i === 0 ? `Упаковки кормов ${b.name}` : ''} fetchPriority="high"
+            className={cn('relative h-auto min-w-0 object-contain object-bottom transition duration-300 group-hover:scale-[1.03]', i === 0 ? 'z-10 w-[58%]' : '-ml-[18%] mb-0 w-[52%] translate-y-2')} />
+        ))}
       </div>
-    </section>
-  )
-}
-
-function BrandsBlock() {
-  return (
-    <section className="wrap pt-16">
-      <SectionTitle more={['Все бренды', pages.brands.path]}>Бренды</SectionTitle>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {brandList.map((b) => <BrandCard key={b.slug} b={b} />)}
-      </div>
-    </section>
+    </Link>
   )
 }
 
@@ -817,7 +1039,7 @@ function SeoText() {
           У нас — сухие корма двух российских брендов. Wonderfur от новосибирского завода КРОКЕТ: рецепты для стерилизованных кошек, котят,
           Urinary при МКБ струвитного типа, для собак всех пород, мелких пород и щенков. Nateria от Саратовского кормового завода: для взрослых кошек
           и котят, стерилизованных, с чувствительным пищеварением, гипоаллергенные и для профилактики МКБ, для собак мелких, средних и крупных пород и щенков.
-          Разделы с наполнителями, амуницией, игрушками и товарами для грызунов, птиц и рыб пополняются. Доставка бесплатная: привезём заказ в пункт
+          Разделы с наполнителями, амуницией, игрушками, лотками, лежанками и товарами для ухода пополняются. Доставка бесплатная: привезём заказ в пункт
           выдачи 5Post — постамат или кассу «Пятёрочки» и «Перекрёстка».
         </p>
       </div>
@@ -869,8 +1091,8 @@ function AnimalPage({ animal, nav }) {
         <p className="mt-2 text-[16px] text-txt-2">{n ? `${goods(n)} в каталоге` : 'Раздел пополняется'}</p>
       </div>
       <section className="wrap pt-6">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {categories[animal].map((c) => <CatTile key={c.id} animal={animal} c={c} />)}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          {categories[animal].map((c) => <CatCard key={c.id} animal={animal} c={c} />)}
         </div>
       </section>
       {n ? <Catalog filter={filter} setFilter={setFilter} fixed={{ animal }} title={`Все товары ${A.of}`} /> : <EmptyCat nav={nav} what={`товары ${A.of}`} />}
@@ -1177,12 +1399,12 @@ function NotFound() {
 /* ---------------- подвал ---------------- */
 function Footer({ nav }) {
   const cols = [
-    ['Каталог', animalKeys.map((a) => [animals[a].name, animals[a].path])],
+    ['Каталог', [...animalKeys.map((a) => ['Товары ' + animals[a].of, animals[a].path]), ['Корм для кошек', catPath('cat', 'dry')], ['Корм для собак', catPath('dog', 'dry')], ['Наполнители', catPath('cat', 'litter')], ['Амуниция', catPath('dog', 'ammo')]]],
     ['Покупателям', [['Доставка и оплата', pages.delivery.path], ['Возврат и обмен', pages.returns.path], ['Частые вопросы', pages.faq.path], ['Контакты', pages.contacts.path]]],
     ['Магазин', [['О магазине', pages.about.path], ...brandList.map((b) => [`Корма ${b.name}`, brandPath(b)]), ['Блог о питании', pages.blog.path], ['Оптовым покупателям', null, 'sales']]],
   ]
   return (
-    <footer className="mt-10 bg-ink pb-24 pt-14 text-white md:pb-10">
+    <footer className="mt-10 bg-ink pb-10 pt-14 text-white md:pb-10">
       <div className="wrap grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1.4fr]">
         <div className="col-span-2 lg:col-span-1">
           <Logo light />
@@ -1236,7 +1458,7 @@ function Messengers() {
   }, [open])
   const item = 'flex w-full items-center gap-2 rounded-full bg-white py-2 pl-2 pr-4 text-sm font-semibold hover:bg-gray-1'
   return (
-    <div ref={box} className={cn('fixed bottom-5 right-5 z-30 flex flex-col items-end gap-2 transition-[bottom]', lifted && 'max-sm:bottom-[76px]')}>
+    <div ref={box} className={cn('fixed bottom-5 right-5 z-30 flex flex-col items-end gap-2 transition-[bottom] max-lg:bottom-[76px]', lifted && 'max-sm:bottom-[140px]')}>
       {open && (
         <div className="grid w-[156px] gap-2">
           <a href={contacts.telegram} target="_blank" rel="noopener nofollow" onClick={() => setOpen(false)} className={item}><TgIcon className="size-8" />Telegram</a>
@@ -1265,7 +1487,7 @@ function CookieBanner() {
   const policy = <Link to={pages.privacy.path} className="text-violet-dark underline">политике конфиденциальности</Link>
   return (
     <div role="region" aria-label="Cookie и персональные данные"
-      className="fixed inset-x-2 bottom-2 z-50 rounded-lg bg-white p-3 shadow-[0_8px_30px_rgba(46,44,56,.22)] sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-[460px] sm:rounded-lg sm:p-5">
+      className="fixed inset-x-2 bottom-[68px] z-50 rounded-lg bg-white p-3 shadow-[0_8px_30px_rgba(46,44,56,.22)] sm:inset-x-auto lg:bottom-5 sm:left-5 sm:max-w-[460px] sm:rounded-lg sm:p-5">
       {/* телефон: одна короткая строка и две маленькие кнопки */}
       <div className="flex items-center gap-2 sm:hidden">
         <p className="flex-1 text-[12px] leading-snug text-txt-2">Мы используем cookie и обрабатываем персональные данные. Подробнее — в {policy}.</p>
@@ -1438,7 +1660,7 @@ function Panels({ nav }) {
 
       {/* плавающая плашка сравнения — видна, пока выбран хотя бы 1 корм, не мешает просмотру каталога */}
       {!!st.compare.length && st.panel !== 'compare' && (
-        <button onClick={() => st.setPanel('compare')} className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-center gap-2 bg-ink px-5 py-4 text-sm font-semibold text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)] sm:bottom-5 sm:left-1/2 sm:inset-x-auto sm:w-auto sm:-translate-x-1/2 sm:rounded-full sm:px-6">
+        <button onClick={() => st.setPanel('compare')} className="fixed inset-x-0 bottom-[60px] z-40 flex items-center justify-center gap-2 bg-ink px-5 py-4 text-sm font-semibold text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)] lg:bottom-5 sm:left-1/2 sm:inset-x-auto sm:w-auto sm:-translate-x-1/2 sm:rounded-full sm:px-6">
           <Scale className="size-4" /> Сравнить состав ({st.compare.length})
         </button>
       )}
@@ -1448,8 +1670,8 @@ function Panels({ nav }) {
         <SheetContent side="left" className="flex w-[320px] max-w-[86vw] flex-none touch-pan-y flex-col gap-0 overflow-x-hidden p-0">
           <SheetHeader className="border-b border-gray-2 p-5"><SheetTitle asChild><div><Logo onClick={close} /></div></SheetTitle><SheetDescription className="sr-only">Меню сайта</SheetDescription></SheetHeader>
           <nav aria-label="Меню" className="flex-1 touch-pan-y overflow-x-hidden overflow-y-auto p-5">
-            <div className="mb-2 text-lg font-extrabold">Каталог</div>
-            {animalKeys.map((a) => <MenuLink key={a} to={animals[a].path} onClick={close}>{animals[a].name}</MenuLink>)}
+            <button onClick={() => st.setPanel('catalog')} className="mb-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-violet-dark text-[16px] font-semibold text-white"><LayoutGrid className="size-5" /> Каталог товаров</button>
+            {animalKeys.map((a) => <MenuLink key={a} to={animals[a].path} onClick={close}>Товары {animals[a].of}</MenuLink>)}
             <div className="mb-2 mt-5 text-lg font-extrabold">Бренды</div>
             {brandList.map((b) => <MenuLink key={b.slug} to={brandPath(b)} onClick={close}>Корма {b.name}</MenuLink>)}
             <div className="mb-2 mt-5 text-lg font-extrabold">Информация</div>

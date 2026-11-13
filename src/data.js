@@ -66,46 +66,60 @@ export const brands = {
 }
 export const brandList = Object.values(brands)
 
-/* ---------------- питомцы и разделы (как в каталоге mokryinos.ru) ---------------- */
-// icon — имя значка из lucide-react
+/* ---------------- питомцы и разделы ---------------- */
+// Только кошки и собаки. Структура разделов — по каталогам «Четыре лапы» (4lapy.ru) и «Мокрый нос» (mokryinos.ru):
+// разделы сгруппированы (корм, туалет, дом, прогулки, уход…), в мега-меню группы идут колонками.
+// subs — подразделы как в каталогах сетей (подсказка в меню и на плитке, не товары). icon — значок lucide-react.
 export const animals = {
   cat: { path: 'koshki/', name: 'Кошки', menu: 'Кошкам', of: 'для кошек', icon: 'Cat' },
   dog: { path: 'sobaki/', name: 'Собаки', menu: 'Собакам', of: 'для собак', icon: 'Dog' },
-  rodent: { path: 'gryzuny/', name: 'Грызуны', menu: 'Грызунам', of: 'для грызунов', icon: 'Rabbit' },
-  bird: { path: 'pticy/', name: 'Птицы', menu: 'Птицам', of: 'для птиц', icon: 'Bird' },
-  fish: { path: 'ryby/', name: 'Рыбы и рептилии', menu: 'Рыбам и рептилиям', of: 'для рыб и рептилий', icon: 'Fish' },
 }
-const C = (id, slug, name, icon) => ({ id, slug, name, icon })
+export const groups = ['Корм', 'Лакомства', 'Туалет', 'Дом и сон', 'Кормление', 'Игрушки', 'Прогулки и поездки', 'Одежда', 'Уход']
+const C = (id, slug, name, icon, group, subs) => ({ id, slug, name, icon, group, subs })
 export const categories = {
   cat: [
-    C('dry', 'suhoj-korm', 'Сухой корм', 'Bean'), C('wet', 'vlazhnyj-korm', 'Влажный корм', 'Soup'),
-    C('treats', 'lakomstva', 'Лакомства', 'Cookie'), C('litter', 'napolniteli', 'Наполнители', 'Layers'),
-    C('toilets', 'tualety', 'Туалеты и лотки', 'Box'), C('bowls', 'miski', 'Миски и кормушки', 'UtensilsCrossed'),
-    C('ammo', 'amuniciya', 'Амуниция', 'Link2'), C('toys', 'igrushki', 'Игрушки', 'Volleyball'),
-    C('beds', 'lezhanki-kogtetochki', 'Лежанки и когтеточки', 'Bed'), C('groom', 'gruming-gigiena', 'Груминг и гигиена', 'Scissors'),
-    C('vet', 'vetapteka', 'Ветаптека и витамины', 'Pill'), C('carry', 'perenoski', 'Переноски', 'BriefcaseBusiness'),
+    C('dry', 'suhoj-korm', 'Сухой корм', 'Bean', 'Корм', ['для котят', 'для взрослых', 'для стерилизованных', 'при МКБ']),
+    C('wet', 'vlazhnyj-korm', 'Влажный корм', 'Soup', 'Корм', ['паучи', 'консервы', 'паштеты']),
+    C('treats', 'lakomstva', 'Лакомства', 'Cookie', 'Лакомства', ['для выведения шерсти', 'для чистки зубов', 'мясные']),
+    C('litter', 'napolniteli', 'Наполнители', 'Layers', 'Туалет', ['комкующийся', 'впитывающий', 'силикагелевый', 'древесный']),
+    C('toilets', 'tualety-lotki', 'Лотки и совки', 'Box', 'Туалет', ['закрытые', 'с бортиком', 'с сеткой', 'совки']),
+    C('beds', 'lezhanki-domiki', 'Лежанки и домики', 'Bed', 'Дом и сон', ['лежанки', 'домики', 'тоннели', 'пледы']),
+    C('scratch', 'kogtetochki', 'Когтеточки и комплексы', 'Grid3x3', 'Дом и сон', ['столбики', 'игровые комплексы', 'из картона']),
+    C('bowls', 'miski-kormushki', 'Миски, кормушки, поилки', 'UtensilsCrossed', 'Кормление', ['миски', 'автокормушки', 'поилки-фонтаны']),
+    C('toys', 'igrushki', 'Игрушки', 'Volleyball', 'Игрушки', ['мышки и мячики', 'дразнилки', 'с мятой', 'интерактивные']),
+    C('ammo', 'amuniciya', 'Шлейки и поводки', 'Link2', 'Прогулки и поездки', ['шлейки', 'ошейники', 'поводки', 'адресники']),
+    C('carry', 'perenoski', 'Переноски и сумки', 'BriefcaseBusiness', 'Прогулки и поездки', ['переноски', 'сумки', 'рюкзаки']),
+    C('groom', 'gruming', 'Груминг', 'Scissors', 'Уход', ['расчёски', 'пуходёрки', 'когтерезы']),
+    C('hygiene', 'gigiena', 'Гигиена и косметика', 'Droplets', 'Уход', ['шампуни', 'влажные салфетки', 'уход за глазами и ушами']),
   ],
   dog: [
-    C('dry', 'suhoj-korm', 'Сухой корм', 'Bean'), C('wet', 'vlazhnyj-korm', 'Влажный корм', 'Soup'),
-    C('treats', 'lakomstva', 'Лакомства', 'Bone'), C('ammo', 'amuniciya', 'Амуниция', 'Link2'),
-    C('clothes', 'odezhda', 'Одежда и обувь', 'Shirt'), C('toys', 'igrushki', 'Игрушки', 'Volleyball'),
-    C('bowls', 'miski', 'Миски и кормушки', 'UtensilsCrossed'), C('beds', 'lezhanki', 'Лежанки и домики', 'Bed'),
-    C('groom', 'gruming-gigiena', 'Груминг и гигиена', 'Scissors'), C('vet', 'vetapteka', 'Ветаптека и витамины', 'Pill'),
-    C('carry', 'perenoski', 'Переноски', 'BriefcaseBusiness'),
-  ],
-  rodent: [
-    C('food', 'korm', 'Корм', 'Wheat'), C('treats', 'lakomstva', 'Лакомства', 'Carrot'),
-    C('litter', 'napolniteli-seno', 'Наполнители и сено', 'Layers'), C('cages', 'kletki-aksessuary', 'Клетки и аксессуары', 'Grid3x3'),
-  ],
-  bird: [
-    C('food', 'korm', 'Корм', 'Wheat'), C('treats', 'lakomstva', 'Лакомства', 'Cookie'),
-    C('cages', 'kletki-aksessuary', 'Клетки и аксессуары', 'Grid3x3'),
-  ],
-  fish: [
-    C('food', 'korm', 'Корм', 'Wheat'), C('aqua', 'akvariumy-terrariumy', 'Аквариумы и террариумы', 'Waves'),
+    C('dry', 'suhoj-korm', 'Сухой корм', 'Bean', 'Корм', ['для щенков', 'для мелких пород', 'для средних и крупных', 'при МКБ']),
+    C('wet', 'vlazhnyj-korm', 'Влажный корм', 'Soup', 'Корм', ['паучи', 'консервы', 'паштеты']),
+    C('treats', 'lakomstva', 'Лакомства', 'Bone', 'Лакомства', ['для чистки зубов', 'мясные', 'для дрессировки']),
+    C('pads', 'pelenki', 'Пелёнки и пакеты', 'Box', 'Туалет', ['впитывающие пелёнки', 'пакеты для уборки']),
+    C('beds', 'lezhanki-domiki', 'Лежанки и домики', 'Bed', 'Дом и сон', ['лежаки', 'матрасы', 'будки и домики']),
+    C('bowls', 'miski-kormushki', 'Миски, кормушки, поилки', 'UtensilsCrossed', 'Кормление', ['миски', 'на подставке', 'дорожные']),
+    C('toys', 'igrushki', 'Игрушки', 'Volleyball', 'Игрушки', ['мячи', 'канаты', 'жевательные', 'пищалки']),
+    C('ammo', 'amuniciya', 'Амуниция', 'Link2', 'Прогулки и поездки', ['ошейники', 'поводки и рулетки', 'шлейки', 'намордники']),
+    C('carry', 'perenoski', 'Переноски', 'BriefcaseBusiness', 'Прогулки и поездки', ['переноски', 'сумки', 'автогамаки']),
+    C('clothes', 'odezhda-obuv', 'Одежда и обувь', 'Shirt', 'Одежда', ['комбинезоны', 'куртки', 'свитеры', 'ботинки']),
+    C('groom', 'gruming', 'Груминг', 'Scissors', 'Уход', ['расчёски', 'пуходёрки', 'когтерезы']),
+    C('hygiene', 'gigiena', 'Гигиена и косметика', 'Droplets', 'Уход', ['шампуни', 'лосьоны для лап', 'уход за глазами и ушами']),
   ],
 }
 export const catOf = (animal, id) => categories[animal]?.find((c) => c.id === id)
+
+// «Что подобрать для вашего питомца?» — подборки по реальным свойствам кормов (поиск по каталогу), как блок на 4lapy.ru
+export const picks = [
+  { animal: 'cat', title: 'Котёнку', q: 'котят' },
+  { animal: 'cat', title: 'Стерилизованной кошке', q: 'стерилизованных' },
+  { animal: 'cat', title: 'Кошке при МКБ', q: 'МКБ' },
+  { animal: 'cat', title: 'Чувствительное пищеварение', q: 'чувствительн' },
+  { animal: 'dog', title: 'Щенку', q: 'щенков' },
+  { animal: 'dog', title: 'Собаке мелкой породы', q: 'мелких' },
+  { animal: 'dog', title: 'Собаке средней и крупной породы', q: 'крупных' },
+  { animal: 'dog', title: 'Собаке при МКБ', q: 'МКБ' },
+]
 
 /* ---------------- товары ---------------- */
 // Корма с сайтов брендов: id и slug получают префикс бренда (у брендов совпадают id, напр. cat-sterile-turkey-lamb)
@@ -195,7 +209,7 @@ export const pages = {
   brands: { path: 'brendy/', title: 'Бренды зоомагазина', h1: 'Бренды',
     desc: 'Бренды кормов в нашем магазине: Wonderfur и Nateria.' },
   catalog: { path: 'katalog/', title: 'Каталог зоотоваров', h1: 'Каталог',
-    desc: 'Каталог зоотоваров для кошек, собак, грызунов, птиц, рыб и рептилий: корма, наполнители, амуниция, игрушки.' },
+    desc: 'Каталог зоотоваров для кошек и собак: корма, лакомства, наполнители, лотки, амуниция, игрушки, лежанки, товары для ухода.' },
   contacts: { path: 'kontakty/', title: `Контакты зоомагазина «${STORE}» в Санкт-Петербурге`, h1: 'Контакты',
     desc: 'Телефон, Telegram и Max зоомагазина в Санкт-Петербурге. Ответим на вопросы о товаре и заказе.' },
   faq: { path: 'voprosy/', title: 'Частые вопросы', h1: 'Частые вопросы',
